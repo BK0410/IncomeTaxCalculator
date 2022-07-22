@@ -66,7 +66,8 @@ namespace IncomeTaxCalculator.Controllers
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Role,"tax_payer")
+                new Claim(ClaimTypes.Role,"tax_payer"),
+                new Claim(ClaimTypes.Email,details.Email_ID)
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
@@ -84,13 +85,24 @@ namespace IncomeTaxCalculator.Controllers
             return jwt;
         }
 
+        [HttpPost]
+        [Authorize(Roles = "tax_payer")]
+        [Route("taxfiling")]
+        public async Task<IActionResult> taxFiling(tax_files newFile)
+        {
+            _income_tax_calculatorDbContext.tax_files.Add(newFile);
+            await _income_tax_calculatorDbContext.SaveChangesAsync();
+            return Ok("Filing Process Successful");
+        }
+
+
 
         [HttpGet]
         [Authorize(Roles = "tax_payer")]
-        [Route("signout")]
-        public async Task<IActionResult> Signout()
+        [Route("authcheck")]
+        public async Task<IActionResult> authCheck()
         {
-            return Ok("Signed Out Successfully");
+            return Ok("Authorization Successful");
         }
 
     }

@@ -10,10 +10,6 @@ namespace IncomeTaxCalculator.Models.Entities
 
         public string Username { get; set; }
 
-        public string PAN { get; set; }
-
-        public int Age { get; set; }
-
         public string Email_ID { get; set; }
 
         public string Password { get; set; }
