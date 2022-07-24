@@ -1,5 +1,6 @@
 using IncomeTaxCalculator.Models;
 using IncomeTaxCalculator.Models.Entities;
+using IncomeTaxCalculator.RabbitMQ;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using Wkhtmltopdf.NetCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IMessageProducer, RabbitMQProducer>();
 
 builder.Services.AddControllers();
 builder.Services.AddWkhtmltopdf("wkhtmltopdf");

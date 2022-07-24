@@ -1,5 +1,6 @@
 ﻿using IncomeTaxCalculator.Models;
 using IncomeTaxCalculator.Models.Entities;
+using IncomeTaxCalculator.RabbitMQ;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,12 +22,14 @@ namespace IncomeTaxCalculator.Controllers
         private readonly income_tax_calculatorDBContext _income_tax_calculatorDbContext;
         private readonly IConfiguration _configuration;
         readonly IGeneratePdf _generatePdf;
+        private readonly IMessageProducer _messagePublisher;
 
-        public TaxPayerController(IGeneratePdf generatePdf,income_tax_calculatorDBContext income_tax_calculatorDbContext, IConfiguration configuration)
+        public TaxPayerController(IMessageProducer messagePublisher,IGeneratePdf generatePdf,income_tax_calculatorDBContext income_tax_calculatorDbContext, IConfiguration configuration)
         {
             _income_tax_calculatorDbContext = income_tax_calculatorDbContext;
             _configuration = configuration;
             _generatePdf = generatePdf;
+            _messagePublisher = messagePublisher;
         }
 
 
@@ -98,6 +101,8 @@ namespace IncomeTaxCalculator.Controllers
         {
             _income_tax_calculatorDbContext.tax_files.Add(newFile);
             await _income_tax_calculatorDbContext.SaveChangesAsync();
+
+            _messagePublisher.SendMessage(newFile);
 
             string authorization = Request.Headers["Authorization"];
             if (authorization.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
