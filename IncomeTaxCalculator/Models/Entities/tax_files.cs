@@ -10,6 +10,8 @@ namespace IncomeTaxCalculator.Models.Entities
 
         public string PAN { get; set; }
 
+        public string Name_AsPerPAN { get; set; }
+
         public string income_split_up { get; set; }
 
         public string exemptions { get; set; }

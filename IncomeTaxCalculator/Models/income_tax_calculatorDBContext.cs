@@ -14,5 +14,6 @@ namespace IncomeTaxCalculator.Models
         public DbSet<admins> admins { get; set; }
 
         public DbSet<tax_files> tax_files { get; set; }
+        public DbSet<final_report> final_report { get; set; }
     }
 }

@@ -1,0 +1,76 @@
+﻿@model IncomeTaxCalculator.Models.Entities.final_report
+
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h1>INCOME TAX REPORT</h1>
+        <br />
+    <table>
+        <tbody style="font-size:larger">
+            <tr>
+                <td><strong>Name (as per PAN Card) : </strong></td>
+                <td>@Model.Name_AsPerPAN</td>
+            </tr>
+            <tr>
+                <td><strong>PAN : </strong></td>
+                <td>@Model.PAN</td>
+            </tr>
+            <tr>
+                <td><strong>Sources of Income : </strong></td>
+                <td>@Model.income_split_up</td>
+            </tr>
+            <tr>
+                <td><strong>Total Income : </strong></td>
+                <td>@Model.total_income</td>
+            </tr>
+            <tr>
+                <td><strong>Regime Opted : </strong></td>
+                <td>@Model.regime</td>
+            </tr>
+            <tr>
+                <td><strong>Exemptions Applied : </strong></td>
+                <td>@Model.exemptions_applied</td>
+            </tr>
+            <tr>
+                <td><strong>Exemptions Approved : </strong></td>
+                <td>@Model.exemptions_approved</td>
+            </tr>
+            <tr>
+                <td><strong>Gross Taxable Income : </strong></td>
+                <td>@Model.gross_taxable_income</td>
+            </tr>
+            <tr>
+                <td><strong>Deductions Applied : </strong></td>
+                <td>@Model.deductions_applied</td>
+            </tr>
+            <tr>
+                <td><strong>Deductions Approved : </strong></td>
+                <td>@Model.deductions_approved</td>
+            </tr>
+            <tr>
+                <td><strong>Net Taxable Income : </strong></td>
+                <td>@Model.net_taxable_income</td>
+            </tr>
+            <tr>
+                <td><strong>Tax Slab : </strong></td>
+                <td>@Model.tax_slab</td>
+            </tr>
+            <tr>
+                <td><strong>Net Income Tax : </strong></td>
+                <td>@Model.net_income_tax</td>
+            </tr>
+            <tr>
+                <td><strong>CESS amount : </strong></td>
+                <td>@Model.cess</td>
+            </tr>
+            <tr>
+                <td><strong>Total Income Tax : </strong></td>
+                <td>@Model.total_income_tax</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
